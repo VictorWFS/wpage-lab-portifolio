@@ -6,10 +6,47 @@
   <title>WPage.lab — Portfólio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root { --brand: #2b82ff; --neon: #00ffff; }
-    html { scroll-behavior: smooth; }
-    .neon-text { text-shadow: 0 0 6px var(--neon), 0 0 14px var(--neon); }
-    .neon-ring { box-shadow: 0 0 8px var(--neon), inset 0 0 8px var(--neon); }
+:root {
+    --brand: #2b82ff; /* azul padrão elegante */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Removendo brilhos e sombras */
+  .neon-text {
+    color: var(--brand);
+    text-shadow: none;
+  }
+
+  .neon-ring {
+    box-shadow: none;
+    border-color: var(--brand);
+  }
+
+  a,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  button {
+    color: var(--brand);
+  }
+
+  .bg-brand {
+    background-color: var(--brand);
+  }
+
+  .text-brand {
+    color: var(--brand);
+  }
+
+  .border-brand {
+    border-color: var(--brand);
+  }
   </style>
 </head>
 <body class="min-h-screen bg-neutral-950 text-neutral-100">
@@ -36,14 +73,14 @@
   <section id="home" class="relative overflow-hidden">
     <div class="max-w-6xl mx-auto px-6 py-24 md:py-28 grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950/60 px-3 py-1 text-xs text-neutral-300">
-          <span class="h-2 w-2 rounded-full" style="background:var(--neon)"></span>
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950/60 px-3 py-1 text-s text-neutral-300 pr-10">
+          <span class="h-3 w-3 rounded-full" style="background:var(--neon)"></span>
           Landing pages que brilham no digital
         </div>
         <h1 class="text-4xl md:text-5xl font-semibold leading-tight text-white neon-text">
           Transforme cliques em <span class="text-[var(--neon)]">clientes</span> com a WPage<span style="color:var(--brand)">.lab</span>
         </h1>
-        <p class="mt-5 text-neutral-300 max-w-xl">Páginas rápidas, claras e estratégicas para empreendedores e autônomos. Design + copy + performance com acentos neon.</p>
+        <p class="mt-5 text-neutral-300 max-w-xl">Páginas rápidas, claras e estratégicas para empreendedores e autônomos. Design + copy + performance.</p>
         <div class="mt-8 flex flex-wrap gap-4">
           <a href="#contact" class="rounded-xl bg-white text-neutral-950 px-5 py-3 font-semibold hover:bg-neutral-200">Solicitar orçamento</a>
           <a href="#projects" class="rounded-xl border border-neutral-800 px-5 py-3 text-neutral-100 hover:bg-neutral-900">Ver projetos</a>
@@ -113,7 +150,7 @@
           <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Integração WhatsApp</span>
         </div>
         <div class="mt-6 flex items-center justify-between">
-          <span class="text-[var(--neon)] font-semibold">A partir de R$ 990</span>
+          <span class="text-[var(--neon)] font-semibold">A partir de R$ 499</span>
           <a href="#contact" class="rounded-xl text-white px-4 py-2 font-semibold hover:opacity-90" style="background:var(--brand)">Quero esse</a>
         </div>
       </div>
@@ -126,7 +163,7 @@
           <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">SEO básico</span>
         </div>
         <div class="mt-6 flex items-center justify-between">
-          <span class="text-[var(--neon)] font-semibold">A partir de R$ 750</span>
+          <span class="text-[var(--neon)] font-semibold">A partir de R$ 399</span>
           <a href="#contact" class="rounded-xl text-white px-4 py-2 font-semibold hover:opacity-90" style="background:var(--brand)">Quero esse</a>
         </div>
       </div>
@@ -139,7 +176,7 @@
           <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Monitoramento leve</span>
         </div>
         <div class="mt-6 flex items-center justify-between">
-          <span class="text-[var(--neon)] font-semibold">R$ 120/mês</span>
+          <span class="text-[var(--neon)] font-semibold">R$ 99/mês</span>
           <a href="#contact" class="rounded-xl text-white px-4 py-2 font-semibold hover:opacity-90" style="background:var(--brand)">Assinar</a>
         </div>
       </div>

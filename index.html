@@ -6,65 +6,269 @@
   <title>WPage.lab — Portfólio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-:root {
-    --brand: #2b82ff; /* azul padrão elegante */
-  }
+    :root {
+      --brand: #2b82ff;          /* azul principal */
+      --brand-soft: #7fb3ff;     /* azul suave para detalhes */
+      --brand-muted: #1b3b66;    /* azul escuro para fundos */
+      --bg: #050509;             /* fundo principal */
+    }
 
-  html {
-    scroll-behavior: smooth;
-  }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* Removendo brilhos e sombras */
-  .neon-text {
-    color: var(--brand);
-    text-shadow: none;
-  }
+    body {
+      background: radial-gradient(circle at top, #111827 0, #020308 45%, #000 100%);
+      color: #f5f5f5;
+    }
 
-  .neon-ring {
-    box-shadow: none;
-    border-color: var(--brand);
-  }
+    .bg-brand {
+      background-color: var(--brand);
+    }
 
-  a,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  button {
-    color: var(--brand);
-  }
+    .text-brand {
+      color: var(--brand);
+    }
 
-  .bg-brand {
-    background-color: var(--brand);
-  }
+    .border-brand {
+      border-color: var(--brand);
+    }
 
-  .text-brand {
-    color: var(--brand);
-  }
+    /* Tipografia geral */
+    h1, h2, h3, h4, h5, h6 {
+      letter-spacing: -0.03em;
+    }
 
-  .border-brand {
-    border-color: var(--brand);
-  }
+    /* Glassmorphism leve */
+    .glass {
+      background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(3,7,18,0.92));
+      border: 1px solid rgba(148,163,184,0.15);
+      backdrop-filter: blur(18px);
+    }
+
+    /* Orbes de fundo */
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(40px);
+      opacity: 0.35;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .orb-blue {
+      background: radial-gradient(circle at 30% 30%, var(--brand-soft), transparent 60%);
+    }
+
+    .orb-cyan {
+      background: radial-gradient(circle at 70% 70%, #22d3ee, transparent 60%);
+    }
+
+    /* Hero card flutuando */
+    .floating-card {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Animação de scroll (JS adiciona a classe .in-view) */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    [data-animate].in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navbar colada ao topo com transição */
+    .nav-blur {
+      background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(15,23,42,0.86));
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+      backdrop-filter: blur(18px);
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .nav-blur.scrolled {
+      background: rgba(3,7,18,0.98);
+      border-bottom-color: rgba(55,65,81,0.8);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+    }
+
+    /* Botão primário mais sofisticado */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), #4f46e5);
+      box-shadow: 0 18px 35px rgba(37,99,235,0.35);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) translateX(0.5px);
+      box-shadow: 0 22px 40px rgba(37,99,235,0.42);
+      filter: brightness(1.05);
+    }
+
+    /* Botão ghost */
+    .btn-ghost {
+      transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15,23,42,0.9);
+      transform: translateY(-1px);
+      border-color: rgba(148,163,184,0.45);
+    }
+
+    /* Cards com hover elegante */
+    .card-elevated {
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .card-elevated:hover {
+      transform: translateY(-6px);
+      border-color: rgba(129,140,248,0.6);
+      box-shadow: 0 24px 60px rgba(15,23,42,0.9);
+      background: radial-gradient(circle at top, rgba(37,99,235,0.18), rgba(15,23,42,0.96));
+    }
+
+    /* Badge suave */
+    .badge-soft {
+      background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(8,47,73,0.2));
+      border: 1px solid rgba(148,163,184,0.25);
+    }
+
+    /* Linha decorativa sob títulos */
+    .section-underline {
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+
+    .section-underline::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 80px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--brand), transparent);
+      opacity: 0.8;
+    }
+
+    /* Inputs */
+    .field {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(55,65,81,0.85);
+      background: rgba(15,23,42,0.92);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, transform 0.12s ease;
+    }
+
+    .field:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 1px rgba(37,99,235,0.65);
+      background: #020617;
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .field::placeholder {
+      color: #6b7280;
+    }
+
+    /* Badge do topo (Hero) */
+    .pill {
+      background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(15,23,42,0.8));
+      border: 1px solid rgba(55,65,81,0.85);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+
+    /* Animação simples do “cursor” no texto */
+    .cursor {
+      display: inline-block;
+      width: 1px;
+      height: 1em;
+      margin-left: 2px;
+      background: var(--brand-soft);
+      animation: blink 1s steps(2, start) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Mobile nav (simples) */
+    .mobile-menu {
+      transform-origin: top right;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .mobile-menu.hidden {
+      opacity: 0;
+      transform: scaleY(0.95);
+      pointer-events: none;
+    }
+
+    .mobile-menu.visible {
+      opacity: 1;
+      transform: scaleY(1);
+      pointer-events: auto;
+    }
   </style>
 </head>
-<body class="min-h-screen bg-neutral-950 text-neutral-100">
+<body class="min-h-screen text-neutral-100">
+  <!-- BG Orbs -->
+  <div class="orb orb-blue w-[420px] h-[420px] -top-32 -left-10"></div>
+  <div class="orb orb-cyan w-[480px] h-[480px] top-40 -right-10"></div>
+
   <!-- NAV -->
-  <nav class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/60 border-b border-neutral-900">
+  <nav class="nav-blur sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#home" class="flex items-center gap-3">
-        <div class="h-9 w-9 rounded-full bg-neutral-900 border border-neutral-800 grid place-items-center neon-ring">
-          <span class="text-lg font-bold text-[var(--neon)]">W</span>
+      <a href="#home" class="flex items-center gap-3 group">
+        <div class="h-9 w-9 rounded-2xl bg-slate-950 border border-slate-800 grid place-items-center shadow-md shadow-black/40">
+          <span class="text-lg font-semibold text-brand">W</span>
         </div>
-        <span class="font-semibold">WPage<span style="color:var(--brand)">.lab</span></span>
+        <span class="font-semibold text-sm sm:text-base text-neutral-50">
+          WPage<span class="text-brand">.lab</span>
+        </span>
       </a>
+
+      <!-- Desktop nav -->
       <div class="hidden md:flex items-center gap-6 text-sm">
-        <a class="hover:text-[var(--neon)] text-neutral-300" href="#about">Sobre</a>
-        <a class="hover:text-[var(--neon)] text-neutral-300" href="#services">Serviços</a>
-        <a class="hover:text-[var(--neon)] text-neutral-300" href="#projects">Projetos</a>
-        <a class="hover:text-[var(--neon)] text-neutral-300" href="#proposal">Proposta</a>
-        <a class="px-4 py-2 rounded-xl" style="background:var(--brand)" href="#contact">Orçamento</a>
+        <a class="text-neutral-300 hover:text-brand transition-colors" href="#about">Sobre</a>
+        <a class="text-neutral-300 hover:text-brand transition-colors" href="#services">Serviços</a>
+        <a class="text-neutral-300 hover:text-brand transition-colors" href="#projects">Projetos</a>
+        <a class="text-neutral-300 hover:text-brand transition-colors" href="#proposal">Proposta</a>
+        <a class="btn-primary px-4 py-2 rounded-xl text-sm font-semibold text-white" href="#contact">Orçamento</a>
+      </div>
+
+      <!-- Mobile nav button -->
+      <button id="menuToggle" class="md:hidden inline-flex items-center justify-center rounded-xl border border-slate-700/80 bg-slate-900/70 p-2">
+        <span class="sr-only">Abrir menu</span>
+        <svg id="menuIconOpen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-200" viewBox="0 0 24 24" fill="none">
+          <path d="M4 7h16M4 12h10M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <svg id="menuIconClose" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-200 hidden" viewBox="0 0 24 24" fill="none">
+          <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile nav menu -->
+    <div id="mobileMenu" class="mobile-menu hidden md:hidden bg-slate-950/95 border-t border-slate-800">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3 text-sm">
+        <a class="text-neutral-300 hover:text-brand transition-colors" href="#about">Sobre</a>
+        <a class="text-neutral-300 hover:text-brand transition-colors" href="#services">Serviços</a>
+        <a class="text-neutral-300 hover:text-brand transition-colors" href="#projects">Projetos</a>
+        <a class="text-neutral-300 hover:text-brand transition-colors" href="#proposal">Proposta</a>
+        <a class="btn-primary mt-2 inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold text-white" href="#contact">
+          Solicitar orçamento
+        </a>
       </div>
     </div>
   </nav>
@@ -72,110 +276,169 @@
   <!-- HERO -->
   <section id="home" class="relative overflow-hidden">
     <div class="max-w-6xl mx-auto px-6 py-24 md:py-28 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950/60 px-3 py-1 text-s text-neutral-300 pr-10">
-          <span class="h-3 w-3 rounded-full" style="background:var(--neon)"></span>
-          Landing pages que brilham no digital
+      <div data-animate>
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full pill px-3 py-1 text-xs text-neutral-300 pr-5">
+          <span class="h-2.5 w-2.5 rounded-full bg-brand"></span>
+          Landing pages pensadas como produto digital, não como “site bonitinho”.
         </div>
-        <h1 class="text-4xl md:text-5xl font-semibold leading-tight text-white neon-text">
-          Transforme cliques em <span class="text-[var(--neon)]">clientes</span> com a WPage<span style="color:var(--brand)">.lab</span>
+        <h1 class="text-4xl md:text-5xl font-semibold leading-tight text-white">
+          Transforme cliques em <span class="text-brand">clientes</span> com a WPage<span class="text-brand">.lab</span>
+          <span class="cursor align-middle"></span>
         </h1>
-        <p class="mt-5 text-neutral-300 max-w-xl">Páginas rápidas, claras e estratégicas para empreendedores e autônomos. Design + copy + performance.</p>
+        <p class="mt-5 text-neutral-300/90 max-w-xl text-sm md:text-base">
+          Estúdio focado em landing pages enxutas, rápidas e estratégicas para empreendedores e autônomos.
+          Design, copy e performance falando a mesma língua.
+        </p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="#contact" class="rounded-xl bg-white text-neutral-950 px-5 py-3 font-semibold hover:bg-neutral-200">Solicitar orçamento</a>
-          <a href="#projects" class="rounded-xl border border-neutral-800 px-5 py-3 text-neutral-100 hover:bg-neutral-900">Ver projetos</a>
+          <a href="#contact" class="btn-primary rounded-xl px-5 py-3 font-semibold text-sm md:text-base text-white">
+            Solicitar orçamento
+          </a>
+          <a href="#projects" class="btn-ghost rounded-xl border border-slate-700/80 px-5 py-3 text-neutral-100 text-sm md:text-base">
+            Ver projetos em ação
+          </a>
         </div>
-        <div class="mt-8 flex items-center gap-6 text-sm text-neutral-400">
-          <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full" style="background:var(--neon)"></span>SEO básico</div>
-          <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full" style="background:var(--neon)"></span>Integração WhatsApp</div>
-          <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full" style="background:var(--neon)"></span>Hospedagem incluída</div>
+        <div class="mt-8 flex flex-wrap gap-4 text-xs md:text-sm text-neutral-400">
+          <div class="flex items-center gap-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand"></span>
+            SEO essencial
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand"></span>
+            Integração WhatsApp
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand"></span>
+            Hospedagem incluída
+          </div>
         </div>
       </div>
-      <div class="relative">
-        <div class="aspect-[4/3] w-full rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black shadow-xl shadow-[var(--neon)]/30 grid place-items-center">
-          <div class="text-center">
-            <div class="mx-auto h-16 w-16 rounded-full bg-neutral-900 grid place-items-center border border-[var(--neon)]">
-              <span class="text-2xl font-extrabold text-[var(--neon)]">W</span>
+
+      <div class="relative" data-animate>
+        <div class="floating-card aspect-[4/3] w-full rounded-3xl glass shadow-2xl shadow-black/40 grid place-items-center border border-slate-800">
+          <div class="text-center px-8">
+            <div class="mx-auto h-16 w-16 rounded-2xl bg-slate-950 grid place-items-center border border-brand shadow-md shadow-brand/40">
+              <span class="text-2xl font-extrabold text-brand">W</span>
             </div>
-            <p class="mt-4 text-neutral-300">Preview do estilo WPage.lab</p>
-            <div class="mt-4 flex justify-center gap-2">
-              <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">UX limpo</span>
-              <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Alta conversão</span>
-              <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Mobile-first</span>
+            <p class="mt-4 text-neutral-200 text-sm">
+              Visual clean, copy direta e foco total em conversão.
+            </p>
+            <div class="mt-4 flex justify-center gap-2 flex-wrap">
+              <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">
+                UX minimalista
+              </span>
+              <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">
+                Alta conversão
+              </span>
+              <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">
+                Mobile-first
+              </span>
             </div>
           </div>
         </div>
-        <div class="pointer-events-none absolute -inset-10 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(0,255,255,0.12),transparent_40%)]"></div>
+        <div class="pointer-events-none absolute -inset-10 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.18),transparent_45%)]"></div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section id="about" class="w-full max-w-6xl mx-auto px-6 py-20">
-    <header class="mb-10">
-      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white neon-text">Sobre nós</h2>
-      <p class="text-neutral-300 mt-3 max-w-2xl">Estúdio independente focado em landing pages que geram resultado real para negócios locais e profissionais autônomos.</p>
-      <div class="h-px bg-neutral-800 mt-6"></div>
+    <header class="mb-10" data-animate>
+      <h2 class="section-underline text-3xl md:text-4xl font-semibold tracking-tight text-white">
+        Sobre nós
+      </h2>
+      <p class="text-neutral-300 mt-3 max-w-2xl text-sm md:text-base">
+        A WPage.lab é um estúdio independente especializado em landing pages
+        que tratam o seu serviço como produto: posicionamento claro, argumento forte
+        e um caminho óbvio até o contato.
+      </p>
     </header>
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="rounded-2xl border border-[var(--neon)] bg-neutral-950/60 p-6">
-        <h3 class="text-lg font-semibold text-[var(--neon)]">Estratégia + Design</h3>
-        <p class="mt-2 text-neutral-300">Unimos copywriting, hierarquia visual e provas sociais para guiar o visitante até a ação.</p>
+      <div class="rounded-2xl glass p-6 card-elevated" data-animate>
+        <h3 class="text-lg font-semibold text-brand">Estratégia + Design</h3>
+        <p class="mt-2 text-neutral-300 text-sm">
+          Unimos copywriting, hierarquia visual e provas sociais para guiar o visitante até a ação certa,
+          sem ruídos e sem excesso de elementos.
+        </p>
       </div>
-      <div class="rounded-2xl border border-[var(--neon)] bg-neutral-950/60 p-6">
-        <h3 class="text-lg font-semibold text-[var(--neon)]">Performance</h3>
-        <p class="mt-2 text-neutral-300">Páginas leves, SEO básico e carregamento rápido, priorizando dispositivos móveis.</p>
+      <div class="rounded-2xl glass p-6 card-elevated" data-animate>
+        <h3 class="text-lg font-semibold text-brand">Performance real</h3>
+        <p class="mt-2 text-neutral-300 text-sm">
+          Páginas leves, carregamento rápido e SEO básico configurado, priorizando a experiência em dispositivos móveis.
+        </p>
       </div>
-      <div class="rounded-2xl border border-[var(--neon)] bg-neutral-950/60 p-6">
-        <h3 class="text-lg font-semibold text-[var(--neon)]">Implementação simples</h3>
-        <p class="mt-2 text-neutral-300">Integração com WhatsApp/Formulários, domínio e hospedagem configurados.</p>
+      <div class="rounded-2xl glass p-6 card-elevated" data-animate>
+        <h3 class="text-lg font-semibold text-brand">Implementação simples</h3>
+        <p class="mt-2 text-neutral-300 text-sm">
+          Integração com WhatsApp, formulários, domínio e hospedagem configurados. Você só se preocupa em atender.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- SERVICES -->
   <section id="services" class="w-full max-w-6xl mx-auto px-6 py-20">
-    <header class="mb-10">
-      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">Serviços</h2>
-      <p class="text-neutral-300 mt-3 max-w-2xl">Escolha o que faz sentido para o seu momento.</p>
-      <div class="h-px bg-neutral-800 mt-6"></div>
+    <header class="mb-10" data-animate>
+      <h2 class="section-underline text-3xl md:text-4xl font-semibold tracking-tight text-white">
+        Serviços
+      </h2>
+      <p class="text-neutral-300 mt-3 max-w-2xl text-sm md:text-base">
+        Escolha o pacote que mais combina com o seu momento — do primeiro site à otimização de páginas já existentes.
+      </p>
     </header>
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="rounded-2xl border border-neutral-800 bg-neutral-950/60 p-6 flex flex-col">
+      <div class="rounded-2xl glass p-6 flex flex-col card-elevated" data-animate>
         <h3 class="text-lg font-semibold text-white">Landing Page Essencial</h3>
-        <p class="mt-2 text-neutral-300 flex-1">Página única profissional com CTA, sessão de benefícios, depoimentos e contato.</p>
+        <p class="mt-2 text-neutral-300 flex-1 text-sm">
+          Página única profissional com CTA, sessão de benefícios, depoimentos e contato. Ideal para validar ofertas.
+        </p>
         <div class="mt-4 flex flex-wrap gap-2">
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Layout exclusivo</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Copy otimizada</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Integração WhatsApp</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Layout exclusivo</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Copy otimizada</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Integração WhatsApp</span>
         </div>
         <div class="mt-6 flex items-center justify-between">
+          <span class="text-brand font-semibold text-sm">A partir de R$ 599</span>
+          <a href="#contact" class="btn-primary rounded-xl text-white px-4 py-2 text-xs font-semibold">
+            Quero esse
+          </a>
           <span class="text-[var(--neon)] font-semibold">A partir de R$ 599</span>
           <a href="#contact" class="rounded-xl text-white px-4 py-2 font-semibold hover:opacity-90" style="background:var(--brand)">Quero esse</a>
         </div>
       </div>
-      <div class="rounded-2xl border border-neutral-800 bg-neutral-950/60 p-6 flex flex-col">
+      <div class="rounded-2xl glass p-6 flex flex-col card-elevated" data-animate>
         <h3 class="text-lg font-semibold text-white">Redesign de Página</h3>
-        <p class="mt-2 text-neutral-300 flex-1">Atualização visual e de conteúdo para melhorar conversão e performance.</p>
+        <p class="mt-2 text-neutral-300 flex-1 text-sm">
+          Atualização visual, refinamento de copy e ajustes de estrutura para melhorar conversão e performance.
+        </p>
         <div class="mt-4 flex flex-wrap gap-2">
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Análise UX/UI</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Componentes modernos</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">SEO básico</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Análise UX/UI</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Componentes modernos</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">SEO básico</span>
         </div>
         <div class="mt-6 flex items-center justify-between">
+          <span class="text-brand font-semibold text-sm">A partir de R$ 499</span>
+          <a href="#contact" class="btn-primary rounded-xl text-white px-4 py-2 text-xs font-semibold">
+            Quero esse
+          </a>
           <span class="text-[var(--neon)] font-semibold">A partir de R$ 499</span>
           <a href="#contact" class="rounded-xl text-white px-4 py-2 font-semibold hover:opacity-90" style="background:var(--brand)">Quero esse</a>
         </div>
       </div>
-      <div class="rounded-2xl border border-neutral-800 bg-neutral-950/60 p-6 flex flex-col">
+      <div class="rounded-2xl glass p-6 flex flex-col card-elevated" data-animate>
         <h3 class="text-lg font-semibold text-white">Plano de Manutenção</h3>
-        <p class="mt-2 text-neutral-300 flex-1">Atualizações mensais de conteúdo, ajustes e relatórios simples de métricas.</p>
+        <p class="mt-2 text-neutral-300 flex-1 text-sm">
+          Atualizações mensais de conteúdo, pequenos ajustes e relatórios leves de métricas essenciais.
+        </p>
         <div class="mt-4 flex flex-wrap gap-2">
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Suporte</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Pequenas melhorias</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Monitoramento leve</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Suporte contínuo</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Melhorias recorrentes</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Monitoramento leve</span>
         </div>
         <div class="mt-6 flex items-center justify-between">
+          <span class="text-brand font-semibold text-sm">R$ 99/mês</span>
+          <a href="#contact" class="btn-primary rounded-xl text-white px-4 py-2 text-xs font-semibold">
+            Assinar
+          </a>
           <span class="text-[var(--neon)] font-semibold">R$ 105/mês</span>
           <a href="#contact" class="rounded-xl text-white px-4 py-2 font-semibold hover:opacity-90" style="background:var(--brand)">Assinar</a>
         </div>
@@ -185,147 +448,237 @@
 
   <!-- PROJECTS -->
   <section id="projects" class="w-full max-w-6xl mx-auto px-6 py-20">
-    <header class="mb-10">
-      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">Projetos</h2>
-      <p class="text-neutral-300 mt-3 max-w-2xl">Alguns exemplos que representam o padrão de qualidade WPage.lab.</p>
-      <div class="h-px bg-neutral-800 mt-6"></div>
+    <header class="mb-10" data-animate>
+      <h2 class="section-underline text-3xl md:text-4xl font-semibold tracking-tight text-white">
+        Projetos
+      </h2>
+      <p class="text-neutral-300 mt-3 max-w-2xl text-sm md:text-base">
+        Alguns trabalhos que representam o padrão de qualidade WPage.lab, adaptados a contextos diferentes.
+      </p>
     </header>
     <div class="grid md:grid-cols-3 gap-6">
-      <article class="relative rounded-2xl border border-neutral-800 bg-neutral-950/50 p-6 shadow-lg shadow-black/30">
+      <article class="relative rounded-2xl glass p-6 shadow-lg shadow-black/40 card-elevated" data-animate>
         <div class="flex items-start justify-between gap-4">
           <div>
             <h3 class="text-xl font-semibold text-white">VitalFit</h3>
-            <p class="text-sm text-blue-400">Personal Trainer / Academia</p>
+            <p class="text-xs text-brand-soft text-brand/80">Personal Trainer / Academia</p>
           </div>
-          <div class="shrink-0 rounded-xl bg-neutral-900 p-3 border border-neutral-800">
-            <svg viewBox="0 0 24 24" class="h-6 w-6 text-white"><path fill="currentColor" d="M3 5l4 14 5-10 5 10 4-14h-3l-2 7-4-8-4 8-2-7H3z"/></svg>
+          <div class="shrink-0 rounded-xl bg-slate-950 p-3 border border-slate-700">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-neutral-100"><path fill="currentColor" d="M3 5l4 14 5-10 5 10 4-14h-3l-2 7-4-8-4 8-2-7H3z"/></svg>
           </div>
         </div>
-        <p class="mt-4 text-neutral-300 leading-relaxed">Landing com foco em captação de avaliações físicas: benefícios claros, CTA fixo e prova social.</p>
+        <p class="mt-4 text-neutral-300 leading-relaxed text-sm">
+          Landing focada em captação de avaliações físicas: benefícios claros, CTA fixo e blocos de prova social.
+        </p>
         <div class="mt-5 flex flex-wrap gap-2">
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">+42% leads</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Depoimentos</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">CTA flutuante</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">+42% leads</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Depoimentos em destaque</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">CTA flutuante</span>
         </div>
         <div class="mt-6 flex items-center gap-4">
-          <a href="#contact" class="rounded-xl bg-white text-neutral-950 px-4 py-2 text-sm font-semibold hover:bg-neutral-200">Quero algo assim</a>
-          <button class="rounded-xl border border-neutral-800 px-4 py-2 text-sm text-neutral-200 hover:bg-neutral-900">Ver detalhes</button>
-        </div>
+    <a href="#contact" class="btn-primary rounded-xl bg-white text-neutral-950 px-4 py-2 text-xs font-semibold hover:brightness-105 hover:-translate-y-[1px] transition">
+      Quero algo assim
+    </a>
+    <a
+      href="./vital.html"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn-ghost rounded-xl border border-slate-700 px-4 py-2 text-xs text-neutral-200"
+    >
+      Ver detalhes
+    </a>
+  </div>
       </article>
-      <article class="relative rounded-2xl border border-neutral-800 bg-neutral-950/50 p-6 shadow-lg shadow-black/30">
+
+      <article class="relative rounded-2xl glass p-6 shadow-lg shadow-black/40 card-elevated" data-animate>
         <div class="flex items-start justify-between gap-4">
           <div>
             <h3 class="text-xl font-semibold text-white">Clínica Lumina</h3>
-            <p class="text-sm text-blue-400">Estética e Saúde</p>
+            <p class="text-xs text-brand/80">Estética e Saúde</p>
           </div>
-          <div class="shrink-0 rounded-xl bg-neutral-900 p-3 border border-neutral-800">
-            <svg viewBox="0 0 24 24" class="h-6 w-6 text-white"><path fill="currentColor" d="M3 5l4 14 5-10 5 10 4-14h-3l-2 7-4-8-4 8-2-7H3z"/></svg>
+          <div class="shrink-0 rounded-xl bg-slate-950 p-3 border border-slate-700">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-neutral-100"><path fill="currentColor" d="M3 5l4 14 5-10 5 10 4-14h-3l-2 7-4-8-4 8-2-7H3z"/></svg>
           </div>
         </div>
-        <p class="mt-4 text-neutral-300 leading-relaxed">Página clean para agendamento via WhatsApp, com seção de procedimentos e blocos de confiança.</p>
+        <p class="mt-4 text-neutral-300 leading-relaxed text-sm">
+          Página clean para agendamento via WhatsApp, com sessão de procedimentos, perguntas frequentes
+          e blocos de confiança.
+        </p>
         <div class="mt-5 flex flex-wrap gap-2">
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Mobile-first</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Agendamento rápido</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Destaque de benefícios</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Mobile-first</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Agendamento rápido</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Benefícios em destaque</span>
         </div>
         <div class="mt-6 flex items-center gap-4">
-          <a href="#contact" class="rounded-xl bg-white text-neutral-950 px-4 py-2 text-sm font-semibold hover:bg-neutral-200">Quero algo assim</a>
-          <button class="rounded-xl border border-neutral-800 px-4 py-2 text-sm text-neutral-200 hover:bg-neutral-900">Ver detalhes</button>
-        </div>
+    <a href="#contact" class="btn-primary rounded-xl bg-white text-neutral-950 px-4 py-2 text-xs font-semibold hover:brightness-105 hover:-translate-y-[1px] transition">
+      Quero algo assim
+    </a>
+    <a
+      href="./lumina.html"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn-ghost rounded-xl border border-slate-700 px-4 py-2 text-xs text-neutral-200"
+    >
+      Ver detalhes
+    </a>
+  </div>
       </article>
-      <article class="relative rounded-2xl border border-neutral-800 bg-neutral-950/50 p-6 shadow-lg shadow-black/30">
+
+      <article class="relative rounded-2xl glass p-6 shadow-lg shadow-black/40 card-elevated" data-animate>
         <div class="flex items-start justify-between gap-4">
           <div>
             <h3 class="text-xl font-semibold text-white">João Alves Consultoria</h3>
-            <p class="text-sm text-blue-400">Finanças / Autônomos</p>
+            <p class="text-xs text-brand/80">Finanças / Autônomos</p>
           </div>
-          <div class="shrink-0 rounded-xl bg-neutral-900 p-3 border border-neutral-800">
-            <svg viewBox="0 0 24 24" class="h-6 w-6 text-white"><path fill="currentColor" d="M3 5l4 14 5-10 5 10 4-14h-3l-2 7-4-8-4 8-2-7H3z"/></svg>
+          <div class="shrink-0 rounded-xl bg-slate-950 p-3 border border-slate-700">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-neutral-100"><path fill="currentColor" d="M3 5l4 14 5-10 5 10 4-14h-3l-2 7-4-8-4 8-2-7H3z"/></svg>
           </div>
         </div>
-        <p class="mt-4 text-neutral-300 leading-relaxed">Estrutura voltada para geração de reuniões: proposta de valor, cases, FAQs e chamadas estratégicas.</p>
+        <p class="mt-4 text-neutral-300 leading-relaxed text-sm">
+          Estrutura pensada para gerar reuniões: proposta de valor direta, cases, FAQs e chamadas estratégicas
+          ao longo da página.
+        </p>
         <div class="mt-5 flex flex-wrap gap-2">
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Calendly/WhatsApp</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">FAQs objetivas</span>
-          <span class="inline-flex items-center rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-300">Autoridade</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Calendly / WhatsApp</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">FAQs objetivas</span>
+          <span class="badge-soft inline-flex items-center rounded-full px-3 py-1 text-[11px] text-neutral-200">Autoridade visual</span>
         </div>
-        <div class="mt-6 flex items-center gap-4">
-          <a href="#contact" class="rounded-xl bg-white text-neutral-950 px-4 py-2 text-sm font-semibold hover:bg-neutral-200">Quero algo assim</a>
-          <button class="rounded-xl border border-neutral-800 px-4 py-2 text-sm text-neutral-200 hover:bg-neutral-900">Ver detalhes</button>
-        </div>
+          <div class="mt-6 flex items-center gap-4">
+    <a href="#contact" class="btn-primary rounded-xl bg-white text-neutral-950 px-4 py-2 text-xs font-semibold hover:brightness-105 hover:-translate-y-[1px] transition">
+      Quero algo assim
+    </a>
+    <a
+      href="./jaConsultoria.html"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn-ghost rounded-xl border border-slate-700 px-4 py-2 text-xs text-neutral-200"
+    >
+      Ver detalhes
+    </a>
+  </div>
       </article>
     </div>
   </section>
 
   <!-- PROPOSAL / PROMISE -->
   <section id="proposal" class="w-full max-w-6xl mx-auto px-6 py-20">
-    <header class="mb-10">
-      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">Nossa proposta</h2>
-      <p class="text-neutral-300 mt-3 max-w-2xl">Sem promessas milagrosas. Trabalhamos com clareza, estética e foco em conversão.</p>
-      <div class="h-px bg-neutral-800 mt-6"></div>
+    <header class="mb-10" data-animate>
+      <h2 class="section-underline text-3xl md:text-4xl font-semibold tracking-tight text-white">
+        Nossa proposta
+      </h2>
+      <p class="text-neutral-300 mt-3 max-w-2xl text-sm md:text-base">
+        Sem promessas milagrosas. Entregamos clareza, estética e foco em conversão — e deixamos os números
+        contarem a história.
+      </p>
     </header>
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="rounded-2xl border border-neutral-800 bg-neutral-950/60 p-6">
-        <p class="text-neutral-200">“O objetivo é simples: transformar visitas em oportunidades reais de negócio.”</p>
+      <div class="rounded-2xl glass p-6" data-animate>
+        <p class="text-neutral-200 text-sm">
+          “O objetivo é simples: transformar visitas em oportunidades reais de negócio, sem firulas e sem
+          templates genéricos.”
+        </p>
       </div>
-      <div class="rounded-2xl border border-neutral-800 bg-neutral-950/60 p-6">
-        <p class="text-neutral-200">“Cada sessão da página é pensada para reduzir fricção e conduzir à ação certa.”</p>
+      <div class="rounded-2xl glass p-6" data-animate>
+        <p class="text-neutral-200 text-sm">
+          “Cada sessão da página é pensada para reduzir fricção, responder dúvidas e conduzir o visitante à ação certa.”
+        </p>
       </div>
-      <div class="rounded-2xl border border-neutral-800 bg-neutral-950/60 p-6">
-        <p class="text-neutral-200">“Você recebe uma página leve, bonita e fácil de manter – nada de complicação.”</p>
+      <div class="rounded-2xl glass p-6" data-animate>
+        <p class="text-neutral-200 text-sm">
+          “Você recebe uma página leve, bonita e fácil de manter – com a estrutura que usaríamos em um produto nosso.”
+        </p>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="w-full max-w-6xl mx-auto px-6 py-20">
-    <header class="mb-10">
-      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white">Solicitar orçamento</h2>
-      <p class="text-neutral-300 mt-3 max-w-2xl">Conte em poucas linhas sobre o seu negócio e o objetivo principal da sua página.</p>
-      <div class="h-px bg-neutral-800 mt-6"></div>
+    <header class="mb-10" data-animate>
+      <h2 class="section-underline text-3xl md:text-4xl font-semibold tracking-tight text-white">
+        Solicitar orçamento
+      </h2>
+      <p class="text-neutral-300 mt-3 max-w-2xl text-sm md:text-base">
+        Conte em poucas linhas sobre o seu negócio e o objetivo principal da sua página. A partir disso, fazemos
+        um diagnóstico rápido e sugerimos o melhor formato.
+      </p>
     </header>
 
-    <form id="leadForm" class="grid md:grid-cols-2 gap-6 rounded-2xl border border-neutral-800 bg-neutral-950/60 p-6">
+    <form id="leadForm" class="grid md:grid-cols-2 gap-6 glass rounded-2xl border border-slate-800 p-6" data-animate>
       <div class="space-y-4">
         <label class="block">
-          <span class="text-sm text-neutral-300">Seu negócio</span>
-          <input name="negocio" required placeholder="Ex.: Clínica de estética em Fortaleza" class="mt-2 w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[var(--neon)]" />
+          <span class="text-xs font-medium text-neutral-300">Seu negócio</span>
+          <input
+            name="negocio"
+            required
+            placeholder="Ex.: Clínica de estética em Fortaleza"
+            class="field mt-2 w-full px-4 py-3 text-sm text-neutral-100"
+          />
         </label>
         <label class="block">
-          <span class="text-sm text-neutral-300">Público-alvo</span>
-          <input name="publico" required placeholder="Ex.: mulheres 20–45, classe B" class="mt-2 w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[var(--neon)]" />
+          <span class="text-xs font-medium text-neutral-300">Público-alvo</span>
+          <input
+            name="publico"
+            required
+            placeholder="Ex.: mulheres 20–45, classe B"
+            class="field mt-2 w-full px-4 py-3 text-sm text-neutral-100"
+          />
         </label>
       </div>
       <div class="space-y-4">
         <label class="block">
-          <span class="text-sm text-neutral-300">Objetivo principal</span>
-          <input name="objetivo" required placeholder="Ex.: gerar leads no WhatsApp / agendar consultas" class="mt-2 w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[var(--neon)]" />
+          <span class="text-xs font-medium text-neutral-300">Objetivo principal</span>
+          <input
+            name="objetivo"
+            required
+            placeholder="Ex.: gerar leads no WhatsApp / agendar consultas"
+            class="field mt-2 w-full px-4 py-3 text-sm text-neutral-100"
+          />
         </label>
         <label class="block">
-          <span class="text-sm text-neutral-300">Prazo desejado</span>
-          <input name="prazo" placeholder="Ex.: 10 dias" class="mt-2 w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[var(--neon)]" />
+          <span class="text-xs font-medium text-neutral-300">Prazo desejado</span>
+          <input
+            name="prazo"
+            placeholder="Ex.: 10 dias"
+            class="field mt-2 w-full px-4 py-3 text-sm text-neutral-100"
+          />
         </label>
       </div>
-      <div class="md:col-span-2 flex items-center justify-between">
-        <p class="text-neutral-400 text-sm">Ao enviar, abriremos uma conversa no WhatsApp com as informações acima.</p>
-        <button type="submit" class="rounded-xl px-6 py-3 font-semibold text-white hover:opacity-90" style="background:var(--brand)">Enviar pelo WhatsApp</button>
+      <div class="md:col-span-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <p class="text-neutral-400 text-xs md:text-sm max-w-md">
+          Ao enviar, abriremos uma conversa no WhatsApp com as informações acima para avançarmos no briefing
+          da sua landing page.
+        </p>
+        <button
+          type="submit"
+          class="btn-primary rounded-xl px-6 py-3 font-semibold text-sm text-white flex items-center justify-center gap-2"
+        >
+          <span>Enviar pelo WhatsApp</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </form>
 
-    <p class="text-xs text-neutral-500 mt-4">Prefere e-mail? Escreva para <a class="underline hover:text-neutral-300" href="mailto:contato@wpage.lab">contato@wpage.lab</a></p>
+    <p class="text-xs text-neutral-500 mt-4" data-animate>
+      Prefere e-mail? Escreva para
+      <a class="underline hover:text-neutral-300" href="mailto:contato@wpage.lab">contato@wpage.lab</a>
+    </p>
   </section>
 
   <!-- FOOTER -->
-  <footer class="border-t border-neutral-900">
-    <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3 text-neutral-300">
-        <div class="h-8 w-8 rounded-full bg-neutral-900 border border-neutral-800 grid place-items-center neon-ring"><span class="text-sm font-bold text-[var(--neon)]">W</span></div>
-        <span class="text-sm">© <span id="year"></span> WPage.lab • Todos os direitos reservados</span>
+  <footer class="border-t border-slate-900/80 bg-black/60">
+    <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3 text-neutral-300 text-xs md:text-sm">
+        <div class="h-8 w-8 rounded-2xl bg-slate-950 border border-slate-800 grid place-items-center">
+          <span class="text-sm font-semibold text-brand">W</span>
+        </div>
+        <span>© <span id="year"></span> WPage.lab • Todos os direitos reservados</span>
       </div>
-      <div class="flex items-center gap-4 text-sm">
-        <a href="#services" class="text-neutral-400 hover:text-[var(--neon)]">Serviços</a>
-        <a href="#projects" class="text-neutral-400 hover:text-[var(--neon)]">Projetos</a>
-        <a href="#contact" class="text-neutral-400 hover:text-[var(--neon)]">Contato</a>
+      <div class="flex items-center gap-4 text-xs md:text-sm">
+        <a href="#services" class="text-neutral-400 hover:text-brand transition-colors">Serviços</a>
+        <a href="#projects" class="text-neutral-400 hover:text-brand transition-colors">Projetos</a>
+        <a href="#contact" class="text-neutral-400 hover:text-brand transition-colors">Contato</a>
       </div>
     </div>
   </footer>
@@ -338,10 +691,73 @@
     document.getElementById('leadForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const data = new FormData(e.target);
-      const msg = `Olá! Sou da WPage.lab.\n\nNegócio: ${data.get('negocio')}\nObjetivo da landing: ${data.get('objetivo')}\nPúblico-alvo: ${data.get('publico')}\nPrazo desejado: ${data.get('prazo')}\n\nVamos conversar?`;
+      const msg = `Olá! Sou da WPage.lab.%0A%0A` +
+        `Negócio: ${data.get('negocio')}%0A` +
+        `Objetivo da landing: ${data.get('objetivo')}%0A` +
+        `Público-alvo: ${data.get('publico')}%0A` +
+        `Prazo desejado: ${data.get('prazo') || 'não informado'}%0A%0A` +
+        `Vamos conversar?`;
       const telefone = '5585981613890'; // DDI+DDD+NÚMERO, sem símbolos
-      const url = `https://wa.me/${telefone}?text=${encodeURIComponent(msg)}`;
+      const url = `https://wa.me/${telefone}?text=${msg}`;
       window.open(url, '_blank');
+    });
+
+    // Navbar: altera estilo ao rolar
+    const nav = document.querySelector('.nav-blur');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 12) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Animações de entrada com IntersectionObserver
+    const animatedEls = document.querySelectorAll('[data-animate]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target); // anima uma vez
+          }
+        });
+      },
+      {
+        threshold: 0.15
+      }
+    );
+    animatedEls.forEach((el) => observer.observe(el));
+
+    // Menu mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const iconOpen = document.getElementById('menuIconOpen');
+    const iconClose = document.getElementById('menuIconClose');
+
+    menuToggle.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      if (isHidden) {
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('visible');
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+      } else {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('visible');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      }
+    });
+
+    // Fecha menu mobile ao clicar em links
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('visible');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      });
     });
   </script>
 </body>

@@ -11,8 +11,8 @@
   <style>
     :root {
       --bg-main: #050509;
-      --bg-card: #0d0d14;
-      --bg-chip: #15151f;
+      --bg-card: #0b0b14;
+      --bg-card-soft: #12121c;
       --primary: #ff7a1f;
       --primary-soft: rgba(255, 122, 31, 0.18);
       --accent: #ffb347;
@@ -20,25 +20,38 @@
       --text-muted: #a0a0b2;
       --border-subtle: #20202a;
       --radius-lg: 24px;
-      --radius-md: 16px;
+      --radius-md: 18px;
       --radius-pill: 999px;
-      --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.65);
+      --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.75);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: "Inter", sans-serif;
-      background: #050509;
+      background: radial-gradient(circle at top, #111827 0, #050509 40%, #000 100%);
       color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
     }
 
-    a { text-decoration: none; color: inherit; }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
     .page {
-      max-width: 1200px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 24px 20px 80px;
+      padding: 20px 18px 72px;
     }
 
     /* HEADER */
@@ -46,286 +59,601 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 28px;
+      padding-bottom: 22px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(to bottom, rgba(5,5,9,0.96), rgba(5,5,9,0.9), rgba(5,5,9,0.6), transparent);
+      backdrop-filter: blur(12px);
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .logo-mark {
       width: 38px;
       height: 38px;
-      border-radius: 12px;
-      background: var(--primary);
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), #ffb347);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
       font-size: 18px;
+      box-shadow: 0 12px 28px rgba(255, 122, 31, 0.45);
+    }
+
+    .logo-text strong {
+      font-size: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-text small {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     nav a {
-      margin-left: 18px;
-      font-size: 13px;
-      color: #ccc;
+      font-size: 12px;
+      color: #d4d4e0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-1px);
     }
 
     .nav-cta {
       background: var(--primary);
-      padding: 8px 16px;
-      border-radius: 999px;
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
       color: #fff !important;
+      font-weight: 500;
+      box-shadow: 0 14px 38px rgba(255, 122, 31, 0.55);
     }
 
     /* HERO */
     .hero {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
+      grid-template-columns: 1fr;
+      gap: 26px;
       align-items: center;
-      padding-bottom: 60px;
+      padding: 16px 0 48px;
     }
 
-    .hero img {
-      width: 100%;
-      height: 430px;
-      object-fit: cover;
-      border-radius: 20px;
-      box-shadow: 0 12px 40px rgba(255, 122, 31, 0.3);
+    .hero-left {
+      order: 2;
+    }
+
+    .hero-right {
+      order: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(21, 21, 29, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 12px rgba(255, 122, 31, 0.7);
     }
 
     .hero-title {
-      font-size: 42px;
+      font-size: 30px;
       line-height: 1.1;
       font-weight: 700;
+      letter-spacing: -0.04em;
     }
 
-    .hero-title span { color: var(--accent); }
+    .hero-title span {
+      color: var(--accent);
+    }
 
     .hero-subtitle {
-      margin-top: 14px;
-      font-size: 15px;
+      margin-top: 12px;
+      font-size: 14px;
       color: var(--text-muted);
-      max-width: 420px;
+      max-width: 440px;
+    }
+
+    .hero-actions {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
     }
 
     .btn-primary {
-      display: inline-block;
-      margin-top: 22px;
-      background: var(--primary);
-      padding: 12px 20px;
-      font-size: 15px;
-      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--primary), #ff9f4a);
+      padding: 11px 18px;
+      font-size: 14px;
+      border-radius: var(--radius-pill);
       color: #fff;
-      box-shadow: 0 12px 40px rgba(255, 122, 31, 0.5);
+      box-shadow: 0 14px 40px rgba(255, 122, 31, 0.55);
+      font-weight: 500;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
     }
 
-    /* SEÇÕES */
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 48px rgba(255, 122, 31, 0.7);
+      filter: brightness(1.03);
+    }
+
+    .btn-secondary {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hero-meta {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(12, 12, 20, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .hero-meta-item span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 26px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .hero-float-card {
+      position: absolute;
+      left: 12px;
+      bottom: 14px;
+      padding: 10px 13px;
+      border-radius: 18px;
+      background: rgba(5, 5, 9, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 11px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    }
+
+    .hero-float-card strong {
+      font-size: 12px;
+    }
+
+    .hero-float-tag {
+      font-size: 10px;
+      color: var(--accent);
+    }
+
+    /* SECTION GENÉRICA */
     .section-block {
-      background: #0d0d14;
-      padding: 40px 28px;
-      border-radius: 20px;
+      background: var(--bg-card);
+      padding: 30px 24px;
+      border-radius: var(--radius-lg);
       border: 1px solid #1a1a22;
-      margin-top: 60px;
-      box-shadow: 0 22px 60px rgba(0,0,0,0.7);
+      margin-top: 46px;
+      box-shadow: var(--shadow-soft);
     }
 
     .section-title {
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 700;
+      letter-spacing: -0.03em;
     }
 
     .section-subtitle {
-      margin-top: 6px;
-      font-size: 15px;
+      margin-top: 8px;
+      font-size: 14px;
       color: var(--text-muted);
-      max-width: 520px;
+      max-width: 540px;
     }
 
-    /* BENEFÍCIOS COM IMAGENS */
-    .benefits-grid {
-      margin-top: 30px;
+    /* SOBRE - GRID */
+    .section-sobre {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .section-sobre-img {
+      width: 100%;
+      border-radius: 22px;
+      height: 260px;
+      object-fit: cover;
+      box-shadow: 0 18px 48px rgba(255, 122, 31, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* BENEFÍCIOS */
+    .benefits-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
 
     .benefit-card {
-      background: #14141c;
-      border-radius: 18px;
-      padding: 16px;
+      background: var(--bg-card-soft);
+      border-radius: var(--radius-md);
+      padding: 14px;
       border: 1px solid #22222c;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.85);
+      border-color: rgba(255, 122, 31, 0.6);
+      background: radial-gradient(circle at top, rgba(255, 122, 31, 0.13), var(--bg-card-soft));
     }
 
     .benefit-card img {
       width: 100%;
-      height: 160px;
+      height: 150px;
       object-fit: cover;
       border-radius: 14px;
-      margin-bottom: 14px;
-      box-shadow: 0 10px 30px rgba(255, 122, 31, 0.25);
+      box-shadow: 0 12px 35px rgba(255, 122, 31, 0.3);
     }
 
     .benefit-card h3 {
-      margin-bottom: 6px;
-      font-size: 16px;
+      margin-top: 4px;
+      font-size: 15px;
     }
 
     .benefit-card p {
       font-size: 13px;
-      color: #bbb;
+      color: #c4c4d0;
     }
 
     /* CTA FINAL */
     .cta-card {
-      background: linear-gradient(160deg, rgba(255,122,31,0.65), #0d0d14);
-      border-radius: 20px;
-      padding: 40px 28px;
-      margin-top: 60px;
+      background: radial-gradient(circle at top left, rgba(255, 122, 31, 0.7), #0b0b14 52%);
+      border-radius: var(--radius-lg);
+      padding: 34px 24px;
+      margin-top: 52px;
       text-align: center;
-      box-shadow: 0 22px 70px rgba(0,0,0,0.85);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .cta-card h2 {
-      font-size: 28px;
-      margin-bottom: 10px;
+      font-size: 24px;
+      margin-bottom: 8px;
+      letter-spacing: -0.04em;
     }
 
     .cta-card p {
-      font-size: 15px;
-      color: #eaeaea;
+      font-size: 14px;
+      color: #f3f3ff;
       max-width: 520px;
-      margin: 0 auto 20px;
+      margin: 0 auto 18px;
     }
 
     .cta-btn {
-      background: var(--primary);
-      padding: 14px 28px;
-      border-radius: 999px;
+      background: #050509;
+      padding: 14px 24px;
+      border-radius: var(--radius-pill);
       color: #fff;
-      font-size: 16px;
-      display: inline-block;
-      margin-top: 12px;
-      box-shadow: 0 12px 45px rgba(255, 122, 31, 0.6);
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-weight: 500;
+      transition: background 0.18s ease, transform 0.15s ease, box-shadow 0.15s ease;
     }
 
+    .cta-btn:hover {
+      background: #0f0f1a;
+      transform: translateY(-1px);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.95);
+    }
+
+    /* RESPONSIVIDADE */
+    @media (min-width: 640px) {
+      nav a {
+        font-size: 13px;
+      }
+
+      .hero-title {
+        font-size: 36px;
+      }
+
+      .hero-img {
+        height: 360px;
+      }
+
+      .section-block {
+        padding: 34px 30px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding: 26px 20px 90px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 40px;
+      }
+
+      .hero-left {
+        order: 1;
+      }
+
+      .hero-right {
+        order: 2;
+      }
+
+      .hero-title {
+        font-size: 40px;
+      }
+
+      .hero-subtitle {
+        font-size: 15px;
+      }
+
+      .hero-img {
+        height: 390px;
+      }
+
+      .section-sobre {
+        grid-template-columns: 1.1fr 1fr;
+        gap: 32px;
+      }
+
+      .section-sobre-img {
+        height: 280px;
+      }
+
+      .benefits-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .cta-card {
+        padding: 40px 36px;
+        text-align: center;
+      }
+
+      .cta-card h2 {
+        font-size: 28px;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-title {
+        font-size: 44px;
+      }
+
+      .hero-img {
+        height: 420px;
+      }
+
+      .section-block {
+        margin-top: 56px;
+      }
+    }
+
+    /* Mobile: menu simples (se quiser futuramente pode virar hamburger) */
+    @media (max-width: 640px) {
+      nav {
+        gap: 4px;
+      }
+
+      nav a {
+        padding-inline: 8px;
+      }
+
+      .nav-cta {
+        display: none; /* deixa só o botão principal do Hero no mobile */
+      }
+    }
   </style>
 </head>
 <body>
-<div class="page">
+  <div class="page">
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">
-      <div class="logo-mark">V</div>
-      <div>
-        <strong>VitalFit</strong><br>
-        <small style="color:#aaa">Personal Trainer / Academia</small>
+    <!-- HEADER -->
+    <header>
+      <div class="logo">
+        <div class="logo-mark">V</div>
+        <div class="logo-text">
+          <strong>VitalFit</strong><br>
+          <small>Personal Trainer / Academia</small>
+        </div>
       </div>
-    </div>
 
-    <nav>
-      <a href="#sobre">Sobre</a>
-      <a href="#beneficios">Benefícios</a>
-      <a href="#cta">Planos</a>
-      <a class="nav-cta" href="#cta">Começar</a>
-    </nav>
-  </header>
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#cta">Planos</a>
+        <a class="nav-cta" href="#cta">Começar</a>
+      </nav>
+    </header>
 
-  <!-- HERO -->
-  <section class="hero">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          Acompanhamento físico profissional e humanizado
+        </div>
 
-    <div>
-      <h1 class="hero-title">
-        Evolua seu físico com <span>treinos inteligentes</span>.
-      </h1>
+        <h1 class="hero-title">
+          Evolua seu físico com <span>treinos inteligentes</span>.
+        </h1>
 
-      <p class="hero-subtitle">
-        Acompanhamento profissional, treinos personalizados e constância guiada para transformar seu corpo de forma segura e eficiente.
+        <p class="hero-subtitle">
+          Acompanhamento profissional, treinos personalizados e constância guiada
+          para transformar seu corpo de forma segura, eficiente e sem métodos mirabolantes.
+        </p>
+
+        <div class="hero-actions">
+          <a href="https://wa.me/5585988889999" target="_blank" class="btn-primary">
+            <span>Quero começar agora</span>
+            <span>💬</span>
+          </a>
+          <span class="btn-secondary">
+            Sem contrato anual • Você escolhe o ritmo
+          </span>
+        </div>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span></span>
+            Treinos para sua rotina real
+          </div>
+          <div class="hero-meta-item">
+            <span></span>
+            Check-ins e feedbacks constantes
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGEM HERO -->
+      <div class="hero-right">
+        <div class="hero-image-wrapper">
+          <img
+            class="hero-img"
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80"
+            alt="Treino na academia"
+          />
+          <div class="hero-float-card">
+            <strong>+ Constância, – desculpas</strong>
+            <span class="hero-float-tag">Acompanhamento VitalFit</span>
+            <span style="color: var(--text-muted);">Treinos que cabem no seu dia.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="section-block">
+      <div class="section-sobre">
+        <div>
+          <h2 class="section-title">Evolução guiada de verdade</h2>
+          <p class="section-subtitle">
+            Nada de treinos genéricos copiados da internet. Aqui tudo é criado sob medida para o seu corpo,
+            sua rotina e seu objetivo real — seja ganho de massa, definição, emagrecimento ou performance.
+          </p>
+        </div>
+
+        <!-- IMAGEM DE PERSONAL TREINANDO ALUNA -->
+        <img
+          class="section-sobre-img"
+          src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80"
+          alt="Personal trainer treinando aluna na academia"
+        />
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section id="beneficios" class="section-block">
+      <h2 class="section-title">Benefícios do acompanhamento</h2>
+      <p class="section-subtitle">
+        Um plano completo que vai além da ficha de treino. Você recebe suporte, estratégia
+        e acompanhamento para realmente sair do lugar.
       </p>
 
-      <a href="https://wa.me/5585988889999" target="_blank" class="btn-primary">
-        Quero começar agora
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg" alt="Treinos personalizados" />
+          <h3>Treinos personalizados</h3>
+          <p>Um plano de treino construído exclusivamente para você, considerando histórico, rotina e limitações.</p>
+        </div>
+
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/3823039/pexels-photo-3823039.jpeg" alt="Evolução monitorada" />
+          <h3>Evolução monitorada</h3>
+          <p>Relatórios simples e objetivos para acompanhar sua performance e saber exatamente onde está melhorando.</p>
+        </div>
+
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/1552249/pexels-photo-1552249.jpeg" alt="Constância na prática" />
+          <h3>Constância na prática</h3>
+          <p>Orientação para se manter firme, ajustar o plano quando necessário e não desistir nos primeiros obstáculos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="cta" class="cta-card">
+      <h2>Pronto para mudar seu corpo?</h2>
+      <p>
+        A VitalFit te acompanha em cada etapa, com treinos inteligentes e acompanhamento humano,
+        para garantir resultados reais com constância e estratégia.
+      </p>
+
+      <a href="https://wa.me/5585988889999" target="_blank" class="cta-btn">
+        <span>Começar agora</span>
+        <span>💪🔥</span>
       </a>
-    </div>
+    </section>
 
-    <!-- IMAGEM HERO -->
-    <img 
-      src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80" 
-      alt="Treino na academia" 
-    />
-
-  </section>
-
-  <!-- SOBRE -->
-<section id="sobre" class="section-block" 
-style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
-
-    <div>
-        <h2 class="section-title">Evolução guiada de verdade</h2>
-        <p class="section-subtitle">
-            Nada de treinos genéricos. Aqui tudo é criado sob medida para o seu corpo, sua rotina e seu objetivo real.
-        </p>
-    </div>
-
-    <!-- IMAGEM DE PERSONAL TREINANDO ALUNA (CORRETA E SEMELHANTE À ENVIADA) -->
-    <img 
-        src="./personal.png"
-        alt="Personal trainer treinando aluna na academia"
-        style="
-            width: 100%;
-            border-radius: 20px;
-            height: 300px;
-            object-fit: cover;
-            box-shadow: 0 14px 40px rgba(255, 122, 31, 0.35);
-        "
-    />
-
-</section>
-
-
-
-  <!-- BENEFÍCIOS -->
-  <section id="beneficios" class="section-block">
-    <h2 class="section-title">Benefícios do acompanhamento</h2>
-
-    <div class="benefits-grid">
-
-  <div class="benefit-card">
-    <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg" />
-    <h3>Treinos personalizados</h3>
-    <p>Um plano de treino construído exclusivamente para você.</p>
   </div>
-
-  <div class="benefit-card">
-    <img src="https://images.pexels.com/photos/3823039/pexels-photo-3823039.jpeg" />
-    <h3>Evolução monitorada</h3>
-    <p>Relatórios mensais para acompanhar sua performance.</p>
-  </div>
-
-  <div class="benefit-card">
-  <img src="https://images.pexels.com/photos/1552249/pexels-photo-1552249.jpeg" />
-    <h3>Constância na prática</h3>
-    <p>Você recebe orientação para se manter firme e sem desistir.</p>
-  </div>
-
-</div>
-
-  </section>
-
-  <!-- CTA FINAL -->
-  <section id="cta" class="cta-card">
-    <h2>Pronto para mudar seu corpo?</h2>
-    <p>A VitalFit te acompanha em cada etapa, para garantir resultados reais com constância e estratégia.</p>
-
-    <a href="https://wa.me/5585988889999" target="_blank" class="cta-btn">
-      Começar agora 💪🔥
-    </a>
-  </section>
-
-</div>
 </body>
 </html>

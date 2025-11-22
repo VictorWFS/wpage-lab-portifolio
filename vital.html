@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitalFit – Acompanhamento físico profissional</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #050509;
+      --bg-card: #0d0d14;
+      --bg-chip: #15151f;
+      --primary: #ff7a1f;
+      --primary-soft: rgba(255, 122, 31, 0.18);
+      --accent: #ffb347;
+      --text-main: #f5f5f7;
+      --text-muted: #a0a0b2;
+      --border-subtle: #20202a;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.65);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #050509;
+      color: var(--text-main);
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 28px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    nav a {
+      margin-left: 18px;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: #fff !important;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      padding-bottom: 60px;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 430px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(255, 122, 31, 0.3);
+    }
+
+    .hero-title {
+      font-size: 42px;
+      line-height: 1.1;
+      font-weight: 700;
+    }
+
+    .hero-title span { color: var(--accent); }
+
+    .hero-subtitle {
+      margin-top: 14px;
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 420px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      margin-top: 22px;
+      background: var(--primary);
+      padding: 12px 20px;
+      font-size: 15px;
+      border-radius: 999px;
+      color: #fff;
+      box-shadow: 0 12px 40px rgba(255, 122, 31, 0.5);
+    }
+
+    /* SEÇÕES */
+    .section-block {
+      background: #0d0d14;
+      padding: 40px 28px;
+      border-radius: 20px;
+      border: 1px solid #1a1a22;
+      margin-top: 60px;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.7);
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      margin-top: 6px;
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    /* BENEFÍCIOS COM IMAGENS */
+    .benefits-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .benefit-card {
+      background: #14141c;
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid #22222c;
+    }
+
+    .benefit-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 10px 30px rgba(255, 122, 31, 0.25);
+    }
+
+    .benefit-card h3 {
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    .benefit-card p {
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    /* CTA FINAL */
+    .cta-card {
+      background: linear-gradient(160deg, rgba(255,122,31,0.65), #0d0d14);
+      border-radius: 20px;
+      padding: 40px 28px;
+      margin-top: 60px;
+      text-align: center;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.85);
+    }
+
+    .cta-card h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .cta-card p {
+      font-size: 15px;
+      color: #eaeaea;
+      max-width: 520px;
+      margin: 0 auto 20px;
+    }
+
+    .cta-btn {
+      background: var(--primary);
+      padding: 14px 28px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 16px;
+      display: inline-block;
+      margin-top: 12px;
+      box-shadow: 0 12px 45px rgba(255, 122, 31, 0.6);
+    }
+
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-mark">V</div>
+      <div>
+        <strong>VitalFit</strong><br>
+        <small style="color:#aaa">Personal Trainer / Academia</small>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#beneficios">Benefícios</a>
+      <a href="#cta">Planos</a>
+      <a class="nav-cta" href="#cta">Começar</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div>
+      <h1 class="hero-title">
+        Evolua seu físico com <span>treinos inteligentes</span>.
+      </h1>
+
+      <p class="hero-subtitle">
+        Acompanhamento profissional, treinos personalizados e constância guiada para transformar seu corpo de forma segura e eficiente.
+      </p>
+
+      <a href="https://wa.me/5585988889999" target="_blank" class="btn-primary">
+        Quero começar agora
+      </a>
+    </div>
+
+    <!-- IMAGEM HERO -->
+    <img 
+      src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=80" 
+      alt="Treino na academia" 
+    />
+
+  </section>
+
+  <!-- SOBRE -->
+<section id="sobre" class="section-block" 
+style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+
+    <div>
+        <h2 class="section-title">Evolução guiada de verdade</h2>
+        <p class="section-subtitle">
+            Nada de treinos genéricos. Aqui tudo é criado sob medida para o seu corpo, sua rotina e seu objetivo real.
+        </p>
+    </div>
+
+    <!-- IMAGEM DE PERSONAL TREINANDO ALUNA (CORRETA E SEMELHANTE À ENVIADA) -->
+    <img 
+        src="./personal.png"
+        alt="Personal trainer treinando aluna na academia"
+        style="
+            width: 100%;
+            border-radius: 20px;
+            height: 300px;
+            object-fit: cover;
+            box-shadow: 0 14px 40px rgba(255, 122, 31, 0.35);
+        "
+    />
+
+</section>
+
+
+
+  <!-- BENEFÍCIOS -->
+  <section id="beneficios" class="section-block">
+    <h2 class="section-title">Benefícios do acompanhamento</h2>
+
+    <div class="benefits-grid">
+
+  <div class="benefit-card">
+    <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg" />
+    <h3>Treinos personalizados</h3>
+    <p>Um plano de treino construído exclusivamente para você.</p>
+  </div>
+
+  <div class="benefit-card">
+    <img src="https://images.pexels.com/photos/3823039/pexels-photo-3823039.jpeg" />
+    <h3>Evolução monitorada</h3>
+    <p>Relatórios mensais para acompanhar sua performance.</p>
+  </div>
+
+  <div class="benefit-card">
+  <img src="https://images.pexels.com/photos/1552249/pexels-photo-1552249.jpeg" />
+    <h3>Constância na prática</h3>
+    <p>Você recebe orientação para se manter firme e sem desistir.</p>
+  </div>
+
+</div>
+
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta" class="cta-card">
+    <h2>Pronto para mudar seu corpo?</h2>
+    <p>A VitalFit te acompanha em cada etapa, para garantir resultados reais com constância e estratégia.</p>
+
+    <a href="https://wa.me/5585988889999" target="_blank" class="cta-btn">
+      Começar agora 💪🔥
+    </a>
+  </section>
+
+</div>
+</body>
+</html>
